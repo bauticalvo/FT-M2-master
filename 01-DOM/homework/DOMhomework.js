@@ -58,7 +58,7 @@ function buildToDo(todo, index) {
   var toDoText = document.createElement('span')
   toDoText.innerHTML = todo.description;
   toDoText.id = index
-  if(todo.complete === true){
+  if(todo.complete){
     toDoText.className = 'completeText'
   }
   toDoShell.appendChild(toDoText)
@@ -115,8 +115,10 @@ function addToDo() {
   var todo2 = new ToDo(toDoInput.value)
   if(todo2.description === ''){
     alert('el campo esta vacio')
-  } else toDoItems.push(todo2)
+  } else {
+    toDoItems.push(todo2)
   toDoInput.value = ''
+}
   displayToDos()
 }
 
@@ -127,7 +129,7 @@ function addToDo() {
 
 // Tu código acá:
 var addButton = document.getElementById('addButton')
-addButton.addEventListener('click', addToDo())
+addButton.addEventListener('click', addToDo)
 
 // La función completeToDo se va a ejecutar cuando queramos completar un todo
 // [NOTA: Algunas cuestiones a tener en cuenta
@@ -148,6 +150,12 @@ function completeToDo(event) {
   toDoItems[index].completeToDo()
   displayToDos()
 }
+
+var reset = document.getElementById("reset")
+reset.addEventListener("click", function(){
+  toDoItems = []
+  displayToDos();
+})
 
 // Una vez que llegaste a este punto verificá que todos los tests pasen
 
